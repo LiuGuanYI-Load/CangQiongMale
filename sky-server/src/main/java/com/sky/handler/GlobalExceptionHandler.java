@@ -18,13 +18,37 @@ public class GlobalExceptionHandler {
 
     /**
      * 捕获业务异常
-     * @param ex
-     * @return
-     */
+     * @param //GlobalExceptionHandler
+     * @return com.sky.result.Result
+     * @author gangzi
+     * @create 2024/8/18
+     **/
+
     @ExceptionHandler
     public Result exceptionHandler(BaseException ex){
         log.error("异常信息：{}", ex.getMessage());
         return Result.error(ex.getMessage());
+    }
+    /**
+     * 捕获重复添加员工异常
+     * @param //GlobalExceptionHandler
+     * @return com.sky.result.Result
+     * @author gangzi
+     * @create 2024/8/18
+     **/
+
+
+    @ExceptionHandler
+    public Result exceptionHandler(SQLIntegrityConstraintViolationException ex){
+        String message = ex.getMessage();
+        if(message.contains("Duplicate entry")){
+            String[]split = message.split(" ");
+            String username=split[2];
+            String msg = username+MessageConstant.ALREADY_EXISTS;
+            return Result.error(msg);
+        }else{
+            return Result.error(MessageConstant.UNKNOWN_ERROR);
+        }
     }
 
 }
