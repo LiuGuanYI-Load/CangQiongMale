@@ -89,7 +89,8 @@ public class EmployeeController {
     public Result save(@RequestBody EmployeeDTO employeeDTO) {
         log.info("新增员工:{}",employeeDTO);
         employeeService.save(employeeDTO);//alt+enter创建方法
-        return null;
+        return Result.success();
+        //开发阶段 前后端并行开发  所以主要以接口文档测试为主
 
     }
 
