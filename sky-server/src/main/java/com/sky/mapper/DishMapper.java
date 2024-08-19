@@ -13,5 +13,6 @@ public interface DishMapper {
      */
     @Select("select count(id) from dish where category_id = #{categoryId}")
     Integer countByCategoryId(Long categoryId);
+    // 返回值用包装类型  例如Integer Long
 
 }

@@ -91,12 +91,12 @@ public class EmployeeServiceImpl implements EmployeeService {
         //建立一个常量类
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         //设置当前记录时间的创建时间和修改时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        //设置当前记录创建人id和修改人id  可能jwt
-        // TODO 后期改 当前登录的用户
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
+//        //设置当前记录创建人id和修改人id  可能jwt
+//        // TODO 后期改 当前登录的用户
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.insert(employee);
     }
     /**
@@ -172,10 +172,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         //之前编写的mappering是Employee类型
         Employee employee=new Employee();
         BeanUtils.copyProperties(employeeDTO,employee);
-        //除了拷贝的属性还要更新updateuser updatetime(当前时间)
-        employee.setUpdateTime(LocalDateTime.now());
-        //Id是Jwt校验时通过BaseConTxet(底层ThreadLocal)存储在线程存储空间
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        //除了拷贝的属性还要更新updateuser updatetime(当前时间)
+//        employee.setUpdateTime(LocalDateTime.now());
+//        //Id是Jwt校验时通过BaseConTxet(底层ThreadLocal)存储在线程存储空间
+//        employee.setUpdateUser(BaseContext.getCurrentId());
         //修改
         employeeMapper.update(employee);
     }
