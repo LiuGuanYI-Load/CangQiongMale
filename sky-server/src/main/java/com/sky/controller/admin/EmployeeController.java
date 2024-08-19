@@ -133,4 +133,41 @@ public class EmployeeController {
         return Result.success();
     }
 
+
+
+    /**
+     *  根据id查询员工信息
+     * @param //EmployeeController
+     * @return com.sky.result.Result<com.sky.entity.Employee>
+     * @author gangzi
+     * @create 2024/8/19
+     **/
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工信息")
+    public Result<Employee> getById(@PathVariable("id") long id){
+        //接口文档之中传进的是路径
+        //@Pathvaribile后面的名字  方法的形参和路径参数相等就不用加不然得指定
+        Employee employee=employeeService.getById(id);
+        return Result.success(employee);
+
+    }
+    /**
+     * 修改员工信息
+     * @param //EmployeeController
+     * @return com.sky.result.Result
+     * @author gangzi
+     * @create 2024/8/19
+     **/
+    @PutMapping()
+    @ApiOperation("修改员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        //返回JOSN格式数据
+        //本来都是一个参数一个参数传封装为DTO类
+        //修改新增用一个类传输就可以
+        log.info("修改员工信息:{}",employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
+
 }

@@ -140,7 +140,43 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //链式调用  每个构造方法返回当前对象就能一直调用下去
         Employee employee = Employee.builder().status(status).id(id).build();
+        //方法名字设置为update其他的路径也能用
         employeeMapper.update(employee);
 
+    }
+
+
+    /**
+ *  根据id查询员工信息
+ * @param //EmployeeServiceImpl
+ * @return com.sky.entity.Employee
+ * @author gangzi
+ * @create 2024/8/19
+ **/
+
+    public Employee getById(Long id) {
+        Employee employee =employeeMapper.getById(id);
+        employee.setPassword("******");//简单加密  不让前端看
+        return employee;
+    }
+
+    /**
+     * 更改员工信息
+     * @param //EmployeeServiceImpl
+     * @return void
+     * @author gangzi
+     * @create 2024/8/19
+     **/
+
+    public void update(EmployeeDTO employeeDTO) {
+        //之前编写的mappering是Employee类型
+        Employee employee=new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+        //除了拷贝的属性还要更新updateuser updatetime(当前时间)
+        employee.setUpdateTime(LocalDateTime.now());
+        //Id是Jwt校验时通过BaseConTxet(底层ThreadLocal)存储在线程存储空间
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        //修改
+        employeeMapper.update(employee);
     }
 }

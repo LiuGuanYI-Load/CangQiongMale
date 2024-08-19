@@ -45,6 +45,22 @@ public interface EmployeeService {
 
 void startOrStop(Integer status, Long id);
 
+/**
+ * 根据id查询员工信息
+ * @param //EmployeeService
+ * @return com.sky.entity.Employee
+ * @author gangzi
+ * @create 2024/8/19
+ **/
 
+    Employee getById(Long id);
+    /**
+     * 修改员工信息
+     * @param //EmployeeService
+     * @return void
+     * @author gangzi
+     * @create 2024/8/19
+     **/
 
+    void update(EmployeeDTO employeeDTO);
 }
