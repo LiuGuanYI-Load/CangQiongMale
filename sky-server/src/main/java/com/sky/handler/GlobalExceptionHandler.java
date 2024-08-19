@@ -35,6 +35,7 @@ public class GlobalExceptionHandler {
      * @return com.sky.result.Result
      * @author gangzi
      * @create 2024/8/18
+     * //捕获SQL的异常
      **/
 
 
@@ -42,8 +43,11 @@ public class GlobalExceptionHandler {
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex){
         String message = ex.getMessage();
         if(message.contains("Duplicate entry")){
+            //Duplicate entry ("123")  ()中的代表重复的username
             String[]split = message.split(" ");
+            //按照" "分割 [2]位置就是重复的username
             String username=split[2];
+            //将重复的username和提示信息拼接
             String msg = username+MessageConstant.ALREADY_EXISTS;
             return Result.error(msg);
         }else{
