@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.DishMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        <!--
+        如果是注解的话@Options(useGeneratedKeys="true" keyProperty="id")也可以实现
+            useGeneratedKeys="true" keyProperty="id"
+            KeyProperty是赋值给传进来的对象的值的名字
+            开启键 自动生成，将生成的主键值设置到Dish对象(Mapper层传进来)的id属性中
+        -->
+        insert into dish (name, category_id, price, image, description, create_time, update_time, create_user, update_user,status)
+            values
+                (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})
+    </insert>
+</mapper>

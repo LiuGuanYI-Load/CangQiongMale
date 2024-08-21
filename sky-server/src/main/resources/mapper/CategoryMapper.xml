@@ -15,8 +15,8 @@
         </where>
         order by sort asc , create_time desc
     </select>
-
-    <update id="update" parameterType="Category">
+<!--    修改菜品信息-->
+    <update id="update" parameterType="com.sky.entity.Category">
         update category
         <set>
             <if test="type != null">

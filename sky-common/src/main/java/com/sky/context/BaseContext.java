@@ -1,7 +1,7 @@
 package com.sky.context;
 
 public class BaseContext {
-    //封装ThreadLocal
+    //封装ThreadLocal  取id
     public static ThreadLocal<Long> threadLocal = new ThreadLocal<>();
 
     public static void setCurrentId(Long id) {

@@ -35,7 +35,7 @@ public class AutoFillAspect {
         //反射 +AOP
         log.info("开始进行公共字段自动填充...");
         //获取到当前被拦截方法上的数据库操作类型
-        //在Java编程语言中，方法签名（Method Signature）是一个重要概念，它包含了方法的名称、参数列表以及返回类型
+        //在Java编程语言中，方法签名（Method Signature）是一个重要概念，它包含了<--方法的名称、参数列表以及返回类型-->
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         //获得方法上的操作对象
         AutoFill autofill = signature.getMethod().getAnnotation(AutoFill.class);
