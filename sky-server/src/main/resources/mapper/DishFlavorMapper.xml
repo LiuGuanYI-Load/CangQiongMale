@@ -6,7 +6,9 @@
     <insert id="insertBatch">
         insert into dish_flavor (dish_id, name, value)
         values
-<!--        list是集合(类型为list,数组就是array)，item是集合中的元素，dishflavor是集合中的元素  separator是分隔符-->
+<!--        list是集合(类型为list,数组就是array)其他的DTO直接写属性名就行
+例如 DishDTO dishDTO  collection传入dishDTO就可以了
+，item是集合中的元素，dishflavor是集合中的元素  separator是分隔符-->
         <foreach collection="list" item="dishFlavor" separator=",">
             (#{dishFlavor.dishId},#{dishFlavor.name},#{dishFlavor.value})
         </foreach>
