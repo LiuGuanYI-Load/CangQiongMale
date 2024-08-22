@@ -1,4 +1,4 @@
-package com.sky.AutoFillAspect;
+package com.sky.aspect;
 
 import com.sky.annotation.AutoFill;
 import com.sky.constant.AutoFillConstant;
@@ -37,15 +37,15 @@ public class AutoFillAspect {
         //获取到当前被拦截方法上的数据库操作类型
         //在Java编程语言中，方法签名（Method Signature）是一个重要概念，它包含了<--方法的名称、参数列表以及返回类型-->
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        //获得方法上的操作对象
-        AutoFill autofill = signature.getMethod().getAnnotation(AutoFill.class);
+        //获得方法上的注解对象
+        AutoFill autoFill = signature.getMethod().getAnnotation(AutoFill.class);
         //获得数据库操作类型
-        OperationType operationType = autofill.value();
+        OperationType operationType = autoFill.value();
 
         //获得当前被拦截方法的参数(此时的参数是个对象)-->实体对象
         Object[] args = joinPoint.getArgs();
         //获取到了Employee对象
-        if (args != null || args.length == 0) {
+        if (args == null || args.length == 0) {
             return;
         }
         Object entity = args[0];
@@ -55,9 +55,10 @@ public class AutoFillAspect {
         if (operationType == OperationType.INSERT) {
             try {
                 Method setCreateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_TIME, LocalDateTime.class);
-                Method setCreateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER, LocalDateTime.class);
+                Method setCreateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER,Long.class);
                 Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
-                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, LocalDateTime.class);
+                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);
+                //如果上面抛出异常  下面的set语句就不会赋值  最后会出现全部为空
                 //通过反射机制来为对象属性赋值
                 //invoke把属性now currentId赋值给entity(Employee)
                 setCreateTime.invoke(entity, now);
@@ -65,19 +66,19 @@ public class AutoFillAspect {
                 setUpdateTime.invoke(entity, now);
                 setUpdateUser.invoke(entity, currentId);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         } else if (operationType == OperationType.UPDATE) {
             try {
                 Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
-                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, LocalDateTime.class);
+                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);
 
                 //通过反射机制来为对象属性赋值
                 setUpdateTime.invoke(entity, now);
                 setUpdateUser.invoke(entity, currentId);
 
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
 
         }

@@ -39,7 +39,7 @@ public class CommenController {
             String filePath= aliOssUtil.upload(file.getBytes(), ObjectName);
             return Result.success(filePath);
         }catch (IOException e){
-            log.info("文件上传失败: {}",e);
+            log.info("文件上传失败了: {}",e.getMessage());
         }
 
         return Result.error(MessageConstant.UPLOAD_FAILED);

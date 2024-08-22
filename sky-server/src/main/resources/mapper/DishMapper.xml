@@ -7,11 +7,29 @@
         <!--
         如果是注解的话@Options(useGeneratedKeys="true" keyProperty="id")也可以实现
             useGeneratedKeys="true" keyProperty="id"
-            KeyProperty是赋值给传进来的对象的值的名字
+            KeyProperty是主键回显赋值的目标属性名字(方法传进来对象里面的参数的名字)
             开启键 自动生成，将生成的主键值设置到Dish对象(Mapper层传进来)的id属性中
         -->
         insert into dish (name, category_id, price, image, description, create_time, update_time, create_user, update_user,status)
             values
                 (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},#{createUser},#{updateUser},#{status})
     </insert>
+
+    <select id="pageQuery" resultType="com.sky.vo.DishVO">
+        select d.*,c.name as categoryName from dish d left outer join category c on d.category_id = c.id
+        <where>
+<!--       给c.name起别名是因为c.name在数据库的名字也是name 如果直接查出来封装给DiahVO的categoryname
+           就会和dish中的name冲突(两个查出来都是name)-->
+<!--            null说明没有提供 空说明传进来了是空字符串-->
+            <if test="name != null and name != ''">
+                and d.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and d.category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and d.status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>

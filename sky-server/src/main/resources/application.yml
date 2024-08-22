@@ -21,7 +21,7 @@ mybatis:
     #开启驼峰命名
     map-underscore-to-camel-case: true
     #开启Mybatis日志
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 logging:
   level:
@@ -44,3 +44,12 @@ sky:
     access-key-id: ${sky.alioss.access-key-id}
     access-key-secret: ${sky.alioss.access-key-secret}
     bucket-name: ${sky.alioss.bucket-name}
+
+#  servlet:
+#    multipart:
+#      max-file-size: 10MB      # 设置单个文件的最大上传大小
+#      max-request-size: 10MB   # 设置一次请求的最大上传大小（包括所有文件）
+#
+#  tomcat:
+#    max-swallow-size: 50MB  # 设置最大吞吐量
+#    max-http-post-size: 50MB  # 设置最大POST请求体大小
