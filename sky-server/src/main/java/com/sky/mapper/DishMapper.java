@@ -62,5 +62,12 @@ import java.util.List;
  @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
 
+    List<Dish> list(Dish dish);
 
+    /**
+     * 根据套餐id查询菜品列表
+     * @param
+     * @return
+     */
+    List<Dish> getBySetmealId(Long setmealId);
 }

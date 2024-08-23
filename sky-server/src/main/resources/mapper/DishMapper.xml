@@ -70,4 +70,26 @@
         </set>
         where id = #{id}
     </update>
+
+
+    <select id="list" resultType="com.sky.entity.Dish" parameterType="com.sky.entity.Dish">
+        select * from dish
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+    <select id="getBySetmealId" resultType="com.sky.entity.Dish">
+        select d.* from dish d left join setmeal_dish s on s.dish_id = d.id where s.setmeal_id=#{setmealId}
+<!--        根据套餐id找出套餐中包含的菜品信息 -->
+    </select>
 </mapper>
