@@ -36,7 +36,7 @@ sky:
     # 设置jwt签名加密时使用的秘钥
     admin-secret-key: itcast
     # 设置jwt过期时间
-    admin-ttl: 7200000
+    admin-ttl: 7200000000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
   aliyunoss:
@@ -44,6 +44,10 @@ sky:
     access-key-id: ${sky.alioss.access-key-id}
     access-key-secret: ${sky.alioss.access-key-secret}
     bucket-name: ${sky.alioss.bucket-name}
+  redisconf:
+    host: ${sky.redis.host}
+    port: ${sky.redis.port}
+
 
 #  servlet:
 #    multipart:
