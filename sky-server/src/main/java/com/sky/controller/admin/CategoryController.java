@@ -21,7 +21,7 @@ import java.util.List;
 @Api(tags = "分类相关接口")
 @Slf4j
 public class CategoryController {
-
+    //分类id是菜品管理 套餐管理  是菜品的分类类型
     @Autowired
     private CategoryService categoryService;
 

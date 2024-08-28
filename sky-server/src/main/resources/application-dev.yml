@@ -15,3 +15,6 @@ sky:
    access-key-id: LTAI5tDmmsa13g3csXLT54He
    access-key-secret: irnpBXTqXf8DAN5VFdos3MJMGqZxyj
    bucket-name: sky-fangyuan
+  wechat1:
+    appid : wx94d19a50b8f31125
+    secret : 3d05a684543ca5284f6894b7e64f3f36

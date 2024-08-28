@@ -16,7 +16,7 @@
 
     </select>
 
-    <update id="update" parameterType="com.sky.entity.Employee" >
+    <update id="update" parameterType="com.sky.entity.Employee">
         update employee
             <set>
             <if  test="name !=null">name=#{name},</if>
