@@ -13,8 +13,8 @@
                and  dish_id = #{dishId}
             </if>
             <if test="setmealId != null">
-                <!--        setmealId是封装的类之中的属性名字-->
-                <!--        setmeal_id是数据库之中的字段名-->
+                <!--  setmealId是封装的类之中的属性名字-->
+                <!--  setmeal_id是数据库之中的字段名-->
                 and setmeal_id = #{setmealId}
             </if>
             <if test="dishFlavor != null">
