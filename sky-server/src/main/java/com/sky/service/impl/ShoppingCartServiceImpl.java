@@ -27,18 +27,27 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         //通过建立数据库表的方式来添加购物车
         //如果购物车中已经存在该菜品或者套餐，则数量加一，否则添加到购物车中
         ShoppingCart shoppingCart = new ShoppingCart();
+        //拷贝
         BeanUtils.copyProperties(shoppingCartDTO,shoppingCart);
+        //取出ThreadLocal中的用户id
         Long Id= BaseContext.getCurrentId();
+        //设置用户id
         shoppingCart.setUserId(Id);
+        //查询当前菜品或者套餐是否在购物车中
         List<ShoppingCart> list=shoppingCartMapper.list(shoppingCart);
+        //没查出来 则添加
         if(list.size()>0 && list!=null){
             ShoppingCart Cart=list.get(0);
             Cart.setNumber(Cart.getNumber()+1);
+        //更新number根据id  number是+1之后的
             shoppingCartMapper.updateNumberById(Cart);
         }else{
+            //获取到购物车中的菜品id
             Long dishid=shoppingCart.getDishId();
             if(dishid!=null){
+                //获取到菜品
                 Dish dish=dishMapper.getById(dishid);
+                //金额
                 shoppingCart.setAmount(dish.getPrice());
                 shoppingCart.setName(dish.getName());
                 shoppingCart.setImage(dish.getImage());
