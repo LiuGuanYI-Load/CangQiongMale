@@ -63,9 +63,6 @@
         where id = #{id}
     </update>
 
-    <select id="getById" resultType="com.sky.entity.Setmeal">
-        select * from setmeal where id = #{id}
-    </select>
 
     <delete id="deleteById">
         delete from setmeal where id =#{id}
