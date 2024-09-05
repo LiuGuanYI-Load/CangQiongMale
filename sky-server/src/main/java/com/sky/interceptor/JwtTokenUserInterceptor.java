@@ -35,6 +35,15 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //判断当前拦截到的是Controller的方法还是其他资源
+
+
+        //登陆请求放行  就可以在拦截器的拦截路径中不指定login
+//        String url = request.getRequestURI();
+//        if(url.contains("login")){
+//            return true;
+//        }
+
+
         //if (!(handler instanceof HandlerMethod)):
         //
         //这段代码用于判断当前的 handler 是否是一个 HandlerMethod 实例。
@@ -47,12 +56,15 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
         }
 
         //1、从请求头中获取令牌
+        //在请求的时候，请求头中携带的令牌名称默认是token
         String token = request.getHeader(jwtProperties.getUserTokenName());
 
         //2、校验令牌
         try {
             log.info("jwt校验:{}", token);
+            //有token和secretKey就可以校验  secretKey是jwt的密钥(元数据) 可以在配置文件中配置
             Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
+            //登陆生成令牌的时候，将用户id放入了claims中
             Long UserId = Long.valueOf(claims.get(JwtClaimsConstant.USER_ID).toString());
             log.info("当前用户id：{}", UserId);
             //在ThreadLocal来存储当前用户id

@@ -102,6 +102,7 @@ public class DishController {
     public Result startOrStop(@PathVariable Integer status,Long id){
         log.info("起售停售菜品:{},{}",status,id);
         dishService.startOrStop(status,id);
+        //清理缓存
         cleanCache("dish_*");
         return Result.success();
     }
