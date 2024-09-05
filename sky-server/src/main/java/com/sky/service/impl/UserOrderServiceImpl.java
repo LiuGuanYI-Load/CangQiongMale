@@ -59,6 +59,7 @@ public class UserOrderServiceImpl implements UserOrderService {
         //取出userId
         Long userId= BaseContext.getCurrentId();
         ShoppingCart shoppingCart = ShoppingCart.builder().userId(userId).build();
+        //查出来的购物车数据
         List<ShoppingCart> shoppingCartList = shoppingCartMapper.list(shoppingCart);
         if(shoppingCartList == null || shoppingCartList.size()==0){
             throw new ShoppingCartBusinessException(MessageConstant.SHOPPING_CART_IS_NULL) ;
