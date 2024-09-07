@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface UserOrderDetailMapper {
+public interface OrderDetailMapper {
 
     void insertBatch(List<OrderDetail> orderDetaillist) ;
 
 
-    List<OrderDetail> getByOrderId(Long orderId);
+    List<OrderDetail>  getByOrderId(Long orderId);
 }
