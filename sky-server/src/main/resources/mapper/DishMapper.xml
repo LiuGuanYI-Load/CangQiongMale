@@ -92,4 +92,15 @@
         select d.* from dish d left join setmeal_dish s on s.dish_id = d.id where s.setmeal_id=#{setmealId}
 <!--        根据套餐id找出套餐中包含的菜品信息 -->
     </select>
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
+    </select>
 </mapper>
