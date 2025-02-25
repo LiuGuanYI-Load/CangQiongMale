@@ -1,2 +1,2 @@
-my project is cuming!
+springboot+springmvc+redis+mysql+slf4j
 
